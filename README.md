@@ -1,4 +1,4 @@
-# simple game devoloped with html&Css & javaScript (DOM)
+# A simple game developed using HTML, CSS, and JavaScript (DOM)
 
 The concept is to guess a number between 1 and 30, with a starting score of 30 points.
 If you guess the correct number, you win.
