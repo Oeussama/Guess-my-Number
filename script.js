@@ -1,24 +1,26 @@
- 'use strict';
+'use strict';
 // variables
-let SecretNumber = Math.trunc(Math.random() * 20) + 1;
-let Score = 20;
+let SecretNumber = Math.trunc(Math.random() * 30) + 1;
+let Score = 30;
 let highScore = 0;
-
 // get check btn
 const checkBtn = document.querySelector('.check');
 const ResetBtn = document.querySelector('.again');
-//function to display a message and multi use selectors
+//functions
 const multiUse = function (Selector, Message) {
   document.querySelector(Selector).textContent = Message;
 };
-
+const backGrColor = function (color) {
+  document.querySelector('body').style.backgroundColor = color;
+};
 
 checkBtn.addEventListener('click', function () {
   let guessNumber = Number(document.querySelector('.guess').value);
   if (!guessNumber) {
+    backGrColor('#a1a105');
     multiUse('.message', '🚫 No Number');
   } else if (guessNumber === SecretNumber) {
-    document.querySelector('body').style.backgroundColor = '#60b347';
+    backGrColor('#60b347');
     multiUse('.number', SecretNumber);
     multiUse('.message', '🎉 Correct Number');
     if (Score > highScore) {
@@ -26,28 +28,26 @@ checkBtn.addEventListener('click', function () {
     }
     multiUse('.highscore', highScore);
   } else if (guessNumber !== SecretNumber) {
+    backGrColor('#222');
     multiUse(
       '.message',
       guessNumber > SecretNumber ? '📉 too high' : '📈 to low'
     );
     Score--;
-    document.querySelector('.score').textContent = Score;
+    multiUse('.score', Score);
     if (Score < 1) {
       multiUse('.message', '🥴 you lost the game');
-      document.querySelector('.score').textContent = 0;
-      document.querySelector('body').style.backgroundColor = '#ef3737';
+      multiUse('.score', 0);
+      backGrColor('#ef3737');
     }
-    console.log(Score);
   }
 });
-
 ResetBtn.addEventListener('click', function () {
-  SecretNumber = Math.trunc(Math.random() * 20) + 1;
-  document.querySelector('body').style.backgroundColor = '#222';
+  SecretNumber = Math.trunc(Math.random() * 30) + 1;
+  backGrColor('#222');
   multiUse('.number', '?');
   document.querySelector('.guess').value = '';
   multiUse('.message', 'Start guessing...');
-  multiUse('.score', 20);
-
-  Score = 20;
+  multiUse('.score', 30);
+  Score = 30;
 });
